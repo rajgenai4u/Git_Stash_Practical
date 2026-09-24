@@ -94,29 +94,37 @@ ideal when you are mid-feature on `feature-payments` and must jump to `main` for
 
 ### Commands used in this practical
 
+Every verb (`push`, `list`, `show`, `apply`, `pop`, `drop`) is executed as its own step below —
+exactly matching the **Complete Git Command Log** in section 6:
+
 ```bash
-# Start: on feature-payments with uncommitted WIP changes in app.py
-git status                      # observe untracked/modified files
-git stash                       # shelve uncommitted changes (stash entry created)
+# ---------- On feature-payments, mid-feature ----------
+git status                      # observe uncommitted WIP changes in app.py
+git stash list                  # stack is empty → nothing restored yet
+git stash push -m "WIP: stripe payment processing"   # shelve WIP (creates stash@{0})
+git stash list                  # stash@{0} now exists
+git checkout main               # working tree is clean → safe to switch
 
-# Now the working tree is clean → safe to switch branches
-git checkout main               # move to main for the urgent fix
-
+# ---------- Hotfix on main ----------
 # ... edit app.py, apply the critical bug fix ...
 git add app.py
 git commit -m "Hotfix: Fix critical bug on main"
 
-# Return to feature work and restore the shelved changes
+# ---------- Back to feature work, inspect the stash ----------
 git checkout feature-payments
-git stash list                  # verify the stashed entry still exists
-git stash apply                 # re-apply changes BUT keep them in the stash
-# — or —
-git stash pop                   # re-apply changes AND drop them from the stash
+git stash list                  # stash@{0} survived the branch switch
+git stash show stash@{0}        # one-line diff summary
+git stash show -p stash@{0}     # full patch of the stashed WIP
 
-# Finish the feature
+# ---------- Restore the WIP ----------
+git stash pop                   # apply the WIP AND consume the stash entry
 git add app.py
 git commit -m "final save on feature-payments"
-git stash drop                  # remove stash entry if it was kept with `apply`
+
+# ---------- apply + drop (keep vs. remove an entry) ----------
+git stash push -m "WIP: extra polish"   # snapshot a scratch change
+git stash apply                         # restore it but KEEP the entry
+git stash drop                          # remove the kept entry (work has been applied)
 ```
 
 ### Full git stash command reference
@@ -169,8 +177,10 @@ git checkout -b feature-payments
 # (started WIP: print("Processing Stripe Payment... (Work in progress)"))
 
 # ---------- Stash the WIP and switch to main ----------
-git status
+git status                       # observe the uncommitted WIP
+git stash list                   # stack is empty → nothing restored yet
 git stash push -m "WIP: stripe payment processing"
+git stash list                   # stash@{0} now exists
 git checkout main
 
 # ---------- Hotfix on main ----------
@@ -178,14 +188,26 @@ git checkout main
 git add app.py
 git commit -m "Hotfix: Fix critical bug on main"
 
-# ---------- Back to feature branch, restore stash ----------
+# ---------- Back to feature branch, inspect the stash ----------
 git checkout feature-payments
-git stash list
-git stash pop
+git stash list                   # stash@{0} survived the branch switch
+git stash show stash@{0}         # one-line diff summary
+git stash show -p stash@{0}      # full patch of the stashed WIP
 
-# ---------- Save the feature work ----------
+# ---------- Restore the WIP ----------
+git stash pop                    # apply the WIP AND consume the stash entry
 git add app.py
 git commit -m "final save on feature-payments"
+
+# ---------- apply + drop demo (keep vs. remove an entry) ----------
+git stash push -m "WIP: extra polish"    # snapshot a scratch change
+git stash apply                          # restore it but KEEP the entry
+git stash drop                           # remove the kept entry (already applied)
+
+# ---------- Preserve the WIP as the final repo state ----------
+# (current repo intentionally keeps the WIP shelved as stash@{0})
+git stash push -m "WIP: stripe payment processing"
+git stash list
 
 # ---------- Push to GitHub ----------
 git remote add origin git@github.com:rajgenai4u/Git_Stash_Practical.git
