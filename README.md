@@ -64,6 +64,7 @@ at `7b8f42e`, so `main` now contains both the hotfix and the Stripe payment WIP.
 | 2 | `199bf30` | `main` | 2026-09-23 22:37 | `Hotfix: Fix critical bug on main` | Changed base message to `"Base Application Running - Critical Bug Fixed!"` |
 | 3 | `567f4ad` | `feature-payments` | 2026-09-23 22:44 | `final save on feature-payments` | Added `print("Processing Stripe Payment... (Work in progress)")` (+2 lines) |
 | 4 | `7b8f42e` | `main` | 2026-09-23 | `Merge feature-payments into main: integrate Stripe payment WIP` | Merged feature branch (hotfix + WIP) — Pushed to `origin/main` |
+| 5 | `b4ff7f1` | `main` | 2026-09-23 | `Integrate restored stash WIP into main: Charging customer $49.99` | Added `print("Charging customer $49.99...")` — final restored-WIP state on `main` |
 
 ### Full log command
 
