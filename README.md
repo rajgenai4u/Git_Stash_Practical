@@ -37,7 +37,7 @@ The practical walks through:
 | Branch | Status | Last Commit | Description |
 |---|---|---|---|
 | `main` | ✅ Pushed to `origin/main` | `199bf30` — *Hotfix: Fix critical bug on main* | Stable base application + critical bug fix |
-| `feature-payments` | Local (created from `main`) | `567f4ad` — *final save on feature-payments* | In-progress Stripe payment processing feature |
+| `feature-payments` | ✅ Pushed to `origin/feature-payments` | `567f4ad` — *final save on feature-payments* | Stripe payment processing feature (WIP committed) |
 
 ### Branch topology
 
@@ -83,7 +83,7 @@ Every step reconstructed from `git reflog`:
 | 22:41:17 | Restored/reset after stash apply | `git stash apply` / `git stash pop` · `git reset HEAD` |
 | 22:44:25 | Committed finished feature work | `git add app.py` · `git commit -m "final save on feature-payments"` |
 | 22:44:49 | Switched back to `main` | `git checkout main` |
-| — | Pushed to GitHub | `git push -u origin main` |
+| — | Pushed to GitHub | `git push -u origin main` · `git push -u origin feature-payments` |
 
 ---
 
@@ -212,7 +212,7 @@ git stash list
 # ---------- Push to GitHub ----------
 git remote add origin git@github.com:rajgenai4u/Git_Stash_Practical.git
 git push -u origin main
-# git push -u origin feature-payments   # push feature branch when ready
+git push -u origin feature-payments
 
 # ---------- Verification ----------
 git status
