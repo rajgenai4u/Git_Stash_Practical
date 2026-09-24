@@ -42,13 +42,16 @@ The practical walks through:
 ### Branch topology
 
 ```
-* 567f4ad (feature-payments) final save on feature-payments
-| * 199bf30 (main, origin/main) Hotfix: Fix critical bug on main
+*   7b8f42e (main, origin/main) Merge feature-payments into main: integrate Stripe payment WIP
+|\
+| * 567f4ad (origin/feature-payments, feature-payments) final save on feature-payments
+* | 199bf30 (origin/main) Hotfix: Fix critical bug on main
 |/
 * 3014d33 Intial commit to main
 ```
 
-Both branches diverge from the initial commit `3014d33`.
+`feature-payments` branched from the initial commit `3014d33` and was later merged back into `main`
+at `7b8f42e`, so `main` now contains both the hotfix and the Stripe payment WIP.
 
 ---
 
@@ -59,6 +62,7 @@ Both branches diverge from the initial commit `3014d33`.
 | 1 | `3014d33` | `main` | 2026-09-23 22:31 | `Intial commit to main` | Created `app.py` (+4 lines) |
 | 2 | `199bf30` | `main` | 2026-09-23 22:37 | `Hotfix: Fix critical bug on main` | Changed base message to `"Base Application Running - Critical Bug Fixed!"` |
 | 3 | `567f4ad` | `feature-payments` | 2026-09-23 22:44 | `final save on feature-payments` | Added `print("Processing Stripe Payment... (Work in progress)")` (+2 lines) |
+| 4 | `7b8f42e` | `main` | 2026-09-23 | `Merge feature-payments into main: integrate Stripe payment WIP` | Merged feature branch (hotfix + WIP) — Pushed to `origin/main` |
 
 ### Full log command
 
