@@ -38,6 +38,7 @@ The practical walks through:
 |---|---|---|---|
 | `main` | ✅ Pushed to `origin/main` | `199bf30` — *Hotfix: Fix critical bug on main* | Stable base application + critical bug fix |
 | `feature-payments` | ✅ Pushed to `origin/feature-payments` | `567f4ad` — *final save on feature-payments* | Stripe payment processing feature (WIP committed) |
+| `wip-stash` | ✅ Pushed to `origin/wip-stash` (snapshot of `stash@{0}`) | commit of `stash@{0}` | Publish of the original *uncommitted* WIP (`Charging customer $49.99...`) so it is verifiable from the remote |
 
 ### Branch topology
 
@@ -217,6 +218,10 @@ git stash list
 git remote add origin git@github.com:rajgenai4u/Git_Stash_Practical.git
 git push -u origin main
 git push -u origin feature-payments
+
+# ---------- Publish the uncommitted WIP for remote verification ----------
+# A stash is local-only, so push its commit to a branch to verify it remotely:
+git push origin 'stash@{0}:refs/heads/wip-stash'
 
 # ---------- Verification ----------
 git status
